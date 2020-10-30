@@ -51,7 +51,8 @@ public class MenuList {
         int choice2 = TestRun.intInputMethod();
         switch (choice2) {
             case 1:
-                employeeDepartment();
+                System.out.println("Registering new employee...");
+                newEmployee();
                 break;
             case 2:
                 menuStats();
@@ -80,64 +81,81 @@ public class MenuList {
         return choice3;
     }
 
-    //Frågar användaren vilken avdelning
-    public static void employeeDepartment() {
-        System.out.println("Select department:\n[1] - Management\n[2] - Development");
-        int department = TestRun.intInputMethod();
-        switch (department) {
-            case 1://Management
-                employeeManagement();
-                //newEmployee();
-                break;
-            case 2://Developments
-                employeeDevelopment();
-                //newEmployee();
-                break;
-            default:
+    //Frågar användaren vilken avdelning | Fortsätter sedan att fråga om roll i vald avdelning
+    public static String employeeDepartment() {
+        String department = "";
+        int choice;
+        do {
+            System.out.println("Select Department:\n[1] - Management\n[2] - Development");
+            choice = TestRun.intInputMethod();
+            if (choice == 1){               //Manager
+                System.out.println("Selected: Management ");
+                department = "Management";
+            } else if (choice == 2){        //Secretaries
+                System.out.println("Selected: Development ");
+                department = "Development";
+            } else {                        //Exception
                 System.out.println("Please enter [1] or [2]");
-        }
+            }
+        }   while (choice <1 || choice > 3);
+        return department;
     }
 
     //Frågar användaren vilken management-roll
-    public static void employeeManagement() {
-        System.out.println("Select title:\n[1] - Manager\n[2] - Secretaries");
-        int role = TestRun.intInputMethod();
-        switch (role) {
-            case 1://Manager
-                //newEmployee();
-                break;
-            case 2://Secretaries
-                //newEmployee();
-                break;
-            default:
+    public static String employeeManagement() {
+        String role = "";
+        int choice;
+        do {
+            System.out.println("Select Title:\n[1] - Manager\n[2] - Secretary");
+            choice = TestRun.intInputMethod();
+            if (choice == 1){               //Manager
+                System.out.println("Selected: Manager ");
+                role = "Manager";
+            } else if (choice == 2){        //Secretaries
+                System.out.println("Selected: Secretary ");
+                role = "Secretary";
+            } else {                        //Exception
                 System.out.println("Please enter [1] or [2]");
-        }
+            }
+        }   while (choice <1 || choice > 3);
+        return role;
     }
 
     //Frågar användaren vilken utvecklings-roll
-    public static void employeeDevelopment() {
-        System.out.println("Select title:\n[1] - Programmer\n[2] - Technician");
-        int role = TestRun.intInputMethod();
-        switch (role) {
-            case 1://Programmer
-                System.out.println("Creating: Programmer ");
-                newEmployee();
-                break;
-            case 2://Technician
-                System.out.println("Creating: Technician ");
-                newEmployee();
-                break;
-            default:
+    public static String employeeDevelopment() {
+        String role = "";
+        int choice;
+        do {
+            System.out.println("Select title:\n[1] - Programmer\n[2] - Technician");
+            choice = TestRun.intInputMethod();
+            if (choice == 1){               //Manager
+                System.out.println("Selected: Programmer ");
+                role = "Programmer";
+            } else if (choice == 2){        //Secretaries
+                System.out.println("Selected: Technician ");
+                role = "Technician";
+            } else {                        //Exception
                 System.out.println("Please enter [1] or [2]");
-        }
+            }
+        }   while (choice <1 || choice > 3);
+        return role;
     }
 
     public static void newEmployee() {
+                                //String role, String department
+        String department = employeeDepartment();
+        String role = "";
+        if (department.equals("Management")){
+            role = employeeManagement();
+        } else if (department.equals("Development")){
+            role = employeeDevelopment();
+        }
+        int employeeID = UniqueID.nextID();
         System.out.println("First name of new employee?");
         String firstName = TestRun.lineInputMethod();
         System.out.println("Last name of employee?");
         String lastName = TestRun.lineInputMethod();
-        System.out.println("What gender is the new employee of?");
+        System.out.println("What gender is the new employee? (Male/Female)");
         String gender = TestRun.lineInputMethod();
         int dateOfBirth;
         do {
@@ -147,6 +165,8 @@ public class MenuList {
         System.out.println("Salary of new employee?");
         int salary = TestRun.intInputMethod();
         System.out.println("Success! New employee has been added to your database.");
+        Employees m3 = new Employees(firstName, lastName, gender, department, role, dateOfBirth, employeeID, salary);
+        System.out.println("Name: " + m3.getFirstName() + " " + m3.getLastName() + "\tGender: " + m3.getGender() + "\tDepartment: " + m3.getDepartment() + "\tRole: " + m3.getRole() + "\t\t\tDate of birth: " + m3.getDateOfBirth() + "\tEmployment ID: " + m3.getEmployeeID() + "\tSalary: " + m3.getSalary() + "\tWorking department: " + m3.getClass());
     }
 
     public static void exit() {

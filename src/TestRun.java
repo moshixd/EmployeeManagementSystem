@@ -23,8 +23,6 @@ public class TestRun {
 
     //public static void displayEmployee(choice){}
 
-    //public static void addEmployee(){}
-
     //Detta är en universiell metod för all inmatning i menyerna
     public static int intInputMethod(){
         int userInput;
@@ -48,6 +46,5 @@ public class TestRun {
             System.out.println("\t\nError: please insert a valid String");
             return userInput = "";
         }
-
     }
 }

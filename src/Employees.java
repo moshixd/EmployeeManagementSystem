@@ -29,10 +29,9 @@ public class Employees implements Specifics {
         this.role = role;
         this.dateOfBirth = dateOfBirth;
         this.employeeID = employeeID;
+        //employeeID++;
         this.salary = salary;
     }
-
-    //Behövs en fori-metod för att generera nya EmployeeID
 
     //Här startar getter & setter
     public String getFirstName() {
