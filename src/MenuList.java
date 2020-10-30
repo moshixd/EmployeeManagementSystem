@@ -142,7 +142,6 @@ public class MenuList {
     }
 
     public static void newEmployee() {
-                                //String role, String department
         String department = employeeDepartment();
         String role = "";
         if (department.equals("Management")){
