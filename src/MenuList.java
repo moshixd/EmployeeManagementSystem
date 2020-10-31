@@ -1,13 +1,13 @@
 public class MenuList {
 
-    public static void welcome(){
+    public static void welcome() {
         System.out.println("\n\n\t\t####################################################\t\t");
         System.out.println("\t\t##########  ---  ===  FIXON AB  ===  ---  ##########\t\t");
         System.out.println("\t\t####################################################\t\t");
         System.out.println("\t\t==  Welcome to EmployeeManagementSystem (0.1001)  ==\n");
     }
 
-    public static void menuMain(){   //Main-menyn som presenterar alternativ
+    public static void menuMain() {   //Main-menyn som presenterar alternativ
         System.out.println("\n\t\t#########################");
         System.out.println("\t\t####==  MAIN MENU  ==####");
         System.out.println("\t\t#########################");
@@ -51,12 +51,27 @@ public class MenuList {
         int choice2 = TestRun.intInputMethod();
         switch (choice2) {
             case 1:
-                System.out.println("Registering new employee...");
-                newEmployee();
+                employeeDepartment();
                 break;
             case 2:
-                menuStats();
+                fireEmployee();
                 break;
+            case 3:
+                updateNameEmp();
+            case 4:
+                updateAgeEmp();
+            case 5:
+                updateDepartmentEmp();
+            case 6:
+                updateSalaryEmp();
+            case 7:
+                searchEmpName();
+            case 8:
+                searchEmpID();
+            case 9:
+                searchEmpDep();
+            case 10:
+                displayAllEmps();
             case 0:
                 exit();
                 break;
@@ -65,7 +80,7 @@ public class MenuList {
         }
     }
 
-    public static int menuStats(){   //Statistik-menyn
+    public static int menuStats() {   //Statistik-menyn
         System.out.println("\n\t\t###############################");
         System.out.println("\t\t##==  EMPLOYEE STATISTICS  ==##");
         System.out.println("\t\t###############################");
@@ -81,94 +96,121 @@ public class MenuList {
         return choice3;
     }
 
-    //Frågar användaren vilken avdelning | Fortsätter sedan att fråga om roll i vald avdelning
-    public static String employeeDepartment() {
-        String department = "";
-        int choice;
-        do {
-            System.out.println("Select Department:\n[1] - Management\n[2] - Development");
-            choice = TestRun.intInputMethod();
-            if (choice == 1){               //Manager
-                System.out.println("Selected: Management ");
-                department = "Management";
-            } else if (choice == 2){        //Secretaries
-                System.out.println("Selected: Development ");
-                department = "Development";
-            } else {                        //Exception
+    //Frågar användaren vilken avdelning
+    public static void employeeDepartment() {
+        System.out.println("Select department:\n[1] - Management\n[2] - Development");
+        int department = TestRun.intInputMethod();
+        switch (department) {
+            case 1://Management
+                employeeManagement();
+                //newEmployee();
+                break;
+            case 2://Developments
+                employeeDevelopment();
+                //newEmployee();
+                break;
+            default:
                 System.out.println("Please enter [1] or [2]");
-            }
-        }   while (choice <1 || choice > 3);
-        return department;
+        }
     }
 
     //Frågar användaren vilken management-roll
-    public static String employeeManagement() {
-        String role = "";
-        int choice;
-        do {
-            System.out.println("Select Title:\n[1] - Manager\n[2] - Secretary");
-            choice = TestRun.intInputMethod();
-            if (choice == 1){               //Manager
-                System.out.println("Selected: Manager ");
-                role = "Manager";
-            } else if (choice == 2){        //Secretaries
-                System.out.println("Selected: Secretary ");
-                role = "Secretary";
-            } else {                        //Exception
+    public static void employeeManagement() {
+        System.out.println("Select title:\n[1] - Manager\n[2] - Secretaries");
+        int role = TestRun.intInputMethod();
+        switch (role) {
+            case 1://Manager
+                //newEmployee();
+                break;
+            case 2://Secretaries
+                //newEmployee();
+                break;
+            default:
                 System.out.println("Please enter [1] or [2]");
-            }
-        }   while (choice <1 || choice > 3);
-        return role;
+        }
     }
 
     //Frågar användaren vilken utvecklings-roll
-    public static String employeeDevelopment() {
-        String role = "";
-        int choice;
-        do {
-            System.out.println("Select title:\n[1] - Programmer\n[2] - Technician");
-            choice = TestRun.intInputMethod();
-            if (choice == 1){               //Manager
-                System.out.println("Selected: Programmer ");
-                role = "Programmer";
-            } else if (choice == 2){        //Secretaries
-                System.out.println("Selected: Technician ");
-                role = "Technician";
-            } else {                        //Exception
+    public static void employeeDevelopment() {
+        System.out.println("Select title:\n[1] - Programmer\n[2] - Technician");
+        int role = TestRun.intInputMethod();
+        switch (role) {
+            case 1://Programmer     
+                System.out.println("Creating: Programmer ");
+                newEmployee();
+                break;
+            case 2://Technician
+                System.out.println("Creating: Technician ");
+                newEmployee();
+                break;
+            default:
                 System.out.println("Please enter [1] or [2]");
-            }
-        }   while (choice <1 || choice > 3);
-        return role;
+        }
     }
 
     public static void newEmployee() {
-        String department = employeeDepartment();
-        String role = "";
-        if (department.equals("Management")){
-            role = employeeManagement();
-        } else if (department.equals("Development")){
-            role = employeeDevelopment();
-        }
-        int employeeID = UniqueID.nextID();
         System.out.println("First name of new employee?");
         String firstName = TestRun.lineInputMethod();
         System.out.println("Last name of employee?");
         String lastName = TestRun.lineInputMethod();
-        System.out.println("What gender is the new employee? (Male/Female)");
+        System.out.println("What gender is the new employee of?");
         String gender = TestRun.lineInputMethod();
         int dateOfBirth;
         do {
             System.out.println("Date of birth of the new employee? (YY/MM/DD)");
             dateOfBirth = TestRun.intInputMethod();
-        } while (Integer.toString(dateOfBirth).length()!=6);
+        } while (Integer.toString(dateOfBirth).length() != 6);
         System.out.println("Salary of new employee?");
         int salary = TestRun.intInputMethod();
+
         System.out.println("Success! New employee has been added to your database.");
-        Employees m3 = new Employees(firstName, lastName, gender, department, role, dateOfBirth, employeeID, salary);
-        System.out.println("Name: " + m3.getFirstName() + " " + m3.getLastName() + "\tGender: " + m3.getGender() + "\tDepartment: " + m3.getDepartment() + "\tRole: " + m3.getRole() + "\t\t\tDate of birth: " + m3.getDateOfBirth() + "\tEmployment ID: " + m3.getEmployeeID() + "\tSalary: " + m3.getSalary() + "\tWorking department: " + m3.getClass());
+    }
+    
+    public static void fireEmployee(){
+        System.out.println("Please input the employee ID of the employee to fire");
+        
+        
+    }
+    
+    public static void updateNameEmp(){
+        
+    }
+    
+    public static void updateAgeEmp(){
+        
+    }
+    
+    public static void updateDepartmentEmp() {
+        
+    }
+    
+    public static void updateSalaryEmp() {
+        
+    }
+    
+    public static void searchEmpName() {
+        
+    }
+    
+    public static void searchEmpID(){
+        
+    }
+    
+    public static void searchEmpDep(){
+        
+    }
+    
+    public static void displayAllEmps(){
+        System.out.println("All employees: ");
+        
+        for (Employees element: pro) {
+            System.out.println(element);
+        }
+        
     }
 
     public static void exit() {
         System.out.println("Thank you for using EMS!");
     }
+
 }
