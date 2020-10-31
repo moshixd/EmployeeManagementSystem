@@ -3,6 +3,10 @@ import java.util.Scanner;
 public class TestRun {
     static Scanner sc = new Scanner(System.in);
     static boolean loop = true;
+    static Employees[] pro = new Programmers[10];
+    static Employees[] tech = new Technicians[10];
+    static Employees[] manager = new Managers[5];
+    static Employees[] secretaries = new Secretaries[5];
 
     public static void main(String[] args) {
         do {    //Testar lite olika metoder
@@ -22,6 +26,8 @@ public class TestRun {
   }
 
     //public static void displayEmployee(choice){}
+
+    //public static void addEmployee(){}
 
     //Detta är en universiell metod för all inmatning i menyerna
     public static int intInputMethod(){
@@ -46,5 +52,21 @@ public class TestRun {
             System.out.println("\t\nError: please insert a valid String");
             return userInput = "";
         }
+
+    }
+    public void Array() {
+        //Skapar array of employee object
+        Employees[] emp = new Employees[10];
+        
+        //Skapar och initialiserar aktuell employee objekt med konstruktor 
+        emp[0] = new Programmers("moshi", "hoshi", "male", "development", "manager", 950204, 1, 20000);
+        
+        //Visa objectet data
+        
+        
+        //display the employee object data
+        System.out.println("Employee:");
+        
+        
     }
 }
